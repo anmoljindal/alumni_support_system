@@ -1,0 +1,56 @@
+﻿{% extends "header.html" %}
+
+{% block style %}
+h3 > span {
+    padding:15px;
+    margin-right:10px;
+}
+
+.que {
+    border:1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+}
+
+.options {
+    float:right;
+    position:static;
+    top:0px;
+}
+
+.glyp, .glyp:hover{
+    margin-left:5px;
+    color:black;
+}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/questionanswer">All Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/askquestion">Ask Question</a></li>
+                <li role="presentation"><a href="/questionanswer/viewaskedquestions">Your Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewansweredquestions">View Answered Questions</a></li>
+                <li role="presentation" class="active"><a href="/questionanswer/viewunansweredquestions">Answer Questions</a></li>
+            </ul>
+        </div>
+    <div class="col-md-9">
+    <h3> New Questions : </h3>
+    {% for q in ques %}
+        <div class="row que">                    
+            
+            <h3><span class="label label-primary"> Question </span> {{q.title}}</h3><br>
+            <span class="description">{{q.description}}</span> 
+            <span style="float: right;">Asked by <strong>{{q.user}}</strong> @ <em>{{q.pub_date}}</em></span>
+            <div class="options">
+                <a href="{% url 'post_answer' pk=q.pk %}" class="glyphicon glyphicon-pencil glyp"></a>
+            </div>               
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+
+<!-- extra fields : user , pub_date-->

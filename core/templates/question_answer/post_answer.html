@@ -1,0 +1,66 @@
+﻿{% extends "header.html" %}
+
+{% block title %}
+<title>Answer Question | {{ques.title}}</title>
+{% endblock %}
+
+{% block style %}
+label {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+
+#id_answer {
+    margin-top:10px;
+    width:100%;
+    height:100px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    resize:none;
+}
+
+.testi {
+    border:1px solid #eee;
+    padding:10px;
+    margin-top:10px;
+    border-radius:5px;
+    border-left-color: #1b809e;
+    border-left-width: 5px;
+    background-color: #f7f7f9;
+}
+{% endblock %}
+
+{% block content %}
+   
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/questionanswer">All Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/askquestion">Ask Question</a></li>
+                <li role="presentation"><a href="/questionanswer/viewaskedquestions">Your Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewansweredquestions">View Answered Questions</a></li>
+                <li role="presentation" class="active"><a href="/questionanswer/viewunansweredquestions">Answer Questions</a></li>
+            </ul>
+        </div>
+        <div class="col-md-8 center-block">
+        <center>
+        <div class="testi">
+            <h2>{{ques.title}}</h2>
+            <h3>{{ques.description}}</h3>
+            <span style="float: right;">Asked by <strong>{{ques.user}}</strong> @ <em>{{ques.pub_date}}</em></span>
+        </div>
+            <form method="post" action="">
+                {%csrf_token%}
+                {{answer_form.as_p}}
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </center>
+        </div>
+    </div>
+    
+{% endblock %}

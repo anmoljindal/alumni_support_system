@@ -1,0 +1,51 @@
+﻿{% extends "header.html" %}
+
+{% block style %}
+textarea {
+    resize:none;
+    width:500px;
+    height: 100px;
+    border-radius:10px;
+}
+#poster {
+    width:200px;
+}
+.labell {
+    font-size:20;
+    padding:10px;    
+    border-radius:10px;
+    background-color:#6699ff;
+    color:white;
+}
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/questionanswer">All Questions</a></li>
+                <li role="presentation" class="active"><a href="/questionanswer/askquestion">Ask Question</a></li>
+                <li role="presentation"><a href="/questionanswer/viewaskedquestions">Your Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewansweredquestions">View Answered Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewunansweredquestions">Answer Questions</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+    <h3> Post your question</h3><br>
+    <form method="post" action="">
+        {%csrf_token%}
+        <div class="row">
+            <span class="labell">Question</span><br>
+            {{question_form.title}}
+        </div><br>
+        <div class="row">
+            <span class="labell">Description</span><br>
+            {{question_form.description}}
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" id="poster" type="submit">Post</button>
+    </form>
+        </div>
+    </div>
+{% endblock %}
+
+<!-- form fields : title, description -->

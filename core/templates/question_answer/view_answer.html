@@ -1,0 +1,65 @@
+﻿{% extends "header.html" %}
+
+{% block style %}
+h3 > span {
+    padding:15px;
+    margin-right:10px;
+}
+
+.que {
+    border:1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.options {
+    float:right;
+    position:static;
+    top:0px;
+}
+
+.glyp, .glyp:hover{
+    margin-left:5px;
+    color:black;
+}
+
+.testi {
+    border:1px solid #eee;
+    padding:10px;
+    margin-top:10px;
+    border-radius:5px;
+    border-left-color: #1b809e;
+    border-left-width: 5px;
+}
+{% endblock %}
+
+{% block content %}    
+
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/questionanswer">All Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/askquestion">Ask Question</a></li>
+                <li role="presentation"><a href="/questionanswer/viewaskedquestions">Your Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewansweredquestions">View Answered Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewunansweredquestions">Answer Questions</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="row que">
+                <h3><span class="label label-primary"> Question </span> {{ques.title}}</h3>
+                <p style="font-size: 20px;font-family:Palatino Linotype;font-color:#888"> {{ques.description}}</p>
+                <span style="float: right;">Asked by <strong>{{ques.user}}</strong> @ <em>{{ques.pub_date}}</em></span>                
+            </div>
+            <h3 style="padding-left: 40px;">Answers</h3>
+            {% for a in ans %}
+                <div class="row testi">
+                    <strong>{{a.user.get_full_name}}</strong> : <em>{{a.answer}}</em>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+<!-- extra fields : user , pub_date-->
